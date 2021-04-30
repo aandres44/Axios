@@ -34,7 +34,7 @@ export default function Login() {
 
                 <FlexContainer>
 
-                    <H4>Edita los datos que deseas modificar.</H4>
+                    <H4>Si deseas crear una cuenta da click aquí!</H4>
 
                     {error && <Alert variant="danger">{error}</Alert>}
                     <Form onSubmit={handleSubmit}>
@@ -55,7 +55,7 @@ export default function Login() {
                                 minLength="8"
                                 type="password"
                                 ref={passwordRef}
-                                placeholder="debe tener al menos 8 digitos"
+                                placeholder="Al menos 8 dígitos"
                             />
                         </Container>
 

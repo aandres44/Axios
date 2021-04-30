@@ -19,7 +19,7 @@ export default function Home() {
           marginBottom: "30px",
           width: "100%",
           fontFamily: "Lato",
-          fontSize: "40px",
+          fontSize: "4em",
         }}
       >
         AXIOS
@@ -27,6 +27,7 @@ export default function Home() {
       <h3
         style={{
           fontFamily: "Lato",
+          fontSize: "2em",
           marginBottom: "35px",
           textAlign: "center",
           paddingLeft: "50px",
@@ -45,6 +46,7 @@ export default function Home() {
 };
 
 const Butt = styled.button`
+  font-size: 2em;
   border: 1px solid #2196F3;
   border-radius: 15px;
   background: none;
