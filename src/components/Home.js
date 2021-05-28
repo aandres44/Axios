@@ -1,46 +1,39 @@
 import React from 'react'
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
+import "./Home.css";
+import logo from "../logo.jpeg";
 
 export default function Home() {
-    return (
-        <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <h1
-        style={{
-          marginTop: "100px",
-          textAlign: "center",
-          marginBottom: "30px",
-          width: "100%",
-          fontFamily: "Lato",
-          fontSize: "4em",
-        }}
-      >
-        AXIOS
-      </h1>
-      <h3
-        style={{
-          fontFamily: "Lato",
-          fontSize: "2em",
-          marginBottom: "35px",
-          textAlign: "center",
-          paddingLeft: "50px",
-          paddingRight: "50px",
-          width: "100%",
-        }}
-      >
-        El mejor lugar para aprender
-      </h3>
+  return (
+    <div className="flex-center home-container">
+      <div className="flex-center">
+        <img
+          src={logo}
+          alt="AXIOS"
+          className="home-img"
+        />
+      </div>
 
-      <Link to="/login">
-        <Butt>Iniciar sesión</Butt>
-      </Link>
+
+      <div className="flex-center">
+        <h2>Para iniciar sesión da click en el boton justo debajo</h2>
+
+
+
+
+      </div>
+
+      <div className="flex-center">
+        <Link to="/login">
+          <Butt>Iniciar sesión</Butt>
+        </Link>
+
+      </div>
+
+
+
+
     </div>
   );
 };
