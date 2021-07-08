@@ -40,13 +40,13 @@ export default function Home() {
 
 const Butt = styled.button`
   font-size: 2em;
-  border: 1px solid #2196F3;
+  border: 1px solid #005092;
   border-radius: 15px;
   background: none;
   padding: 8px 8px;
   font-family: monospace;
   cursor: pointer;
-  color: #2196F3;
+  color: #005092;
   transition: 0.8s;
   position: relative;
   overflow: hidden;
@@ -54,7 +54,7 @@ const Butt = styled.button`
   font-family: Lato;
   &:hover {
     color: white;
-    background: #2196F3;
+    background: #005092;
   }
   ::before {
     content: "";
@@ -62,7 +62,7 @@ const Butt = styled.button`
     left: 0;
     width: 100%;
     height: 0%;
-    background: #2196F3;
+    background: #005092;
     z-index: -1;
     transition: 0.8s;
     top: 0;
