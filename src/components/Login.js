@@ -1,17 +1,38 @@
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, useEffect } from "react";
 import { Button } from "react-bootstrap"
+import { useAuth } from "../contexts/AuthContext";
+import { Link, useHistory } from "react-router-dom";
 import styled from "@emotion/styled";
+import firebase, { auth } from "../firebase";
 
 export default function Login() {
-
     const emailRef = useRef()
     const passwordRef = useRef()
-    const [error, setError] = useState("")
     const [loading, setLoading] = useState(false)
+    const { login } = useAuth();
+    const [error, setError] = useState("");
+    const history = useHistory();
 
     function handleSubmit(e) {
         e.preventDefault()
+
     }
+
+    async function handleLogin(e) {
+        e.preventDefault();
+    
+        try {
+          setError("");
+          setLoading(true);
+          await login(emailRef.current.value, passwordRef.current.value);
+          history.push("/");
+          console.log("logged in")
+        } catch(er) {
+          setError("Error al iniciar sesión: " + er);
+        }
+    
+        setLoading(false);
+      }
 
     return (
 
@@ -29,7 +50,7 @@ export default function Login() {
             <Card>
 
                 <BlueDiv>
-                    <H2>Ingrese sus datos para iniciar sesion</H2>
+                    <H2>Ingrese sus datos para iniciar sesión</H2>
                 </BlueDiv>
 
                 <FlexContainer>
@@ -37,7 +58,7 @@ export default function Login() {
                     <H4>Si deseas crear una cuenta da click aquí!</H4>
 
                     {error && <Alert variant="danger">{error}</Alert>}
-                    <Form onSubmit={handleSubmit}>
+                    <Form onSubmit={handleLogin}>
 
                         <Container id="email">
                             <Label>Dirección de correo electrónico</Label>
@@ -59,10 +80,10 @@ export default function Login() {
                             />
                         </Container>
 
-                        <ButtonReact style={{ marginBottom: '10px' }} 
+                        <ButtonReact style={{ marginBottom: '10px' }}
                             disabled={loading} type="submit"
                         >
-                            Actualizar perfil
+                            Iniciar sesión
                         </ButtonReact>
                     </Form>
                 </FlexContainer>

@@ -1,21 +1,24 @@
-import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Dashboard from './components/Dashboard';
 import Login from './components/Login';
 import Home from './components/Home';
 import Navbar from './components/Navbar'
+import { AuthProvider } from "./contexts/AuthContext";
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <Navbar/>
-        <Switch>
-          <Route exact path='/' component={Home} />
-          <Route path='/login' component={Login} />
-          <Route path='/dashboard' component={Dashboard} />
-        </Switch>
+        <AuthProvider>
+          <Navbar />
+          <Switch>
+            <Route exact path='/' component={Home} />
+            <Route path='/login' component={Login} />
+            <Route path='/dashboard' component={Dashboard} />
+          </Switch>
+        </AuthProvider>
       </Router>
-      
+
     </div>
   );
 }
