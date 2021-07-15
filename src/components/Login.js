@@ -6,97 +6,96 @@ import styled from "@emotion/styled";
 import firebase, { auth } from "../firebase";
 
 export default function Login() {
-    const emailRef = useRef()
-    const passwordRef = useRef()
-    const [loading, setLoading] = useState(false)
-    const { login } = useAuth();
-    const [error, setError] = useState("");
-    const history = useHistory();
+  const emailRef = useRef()
+  const passwordRef = useRef()
+  const [loading, setLoading] = useState(false)
+  const { login } = useAuth();
+  const [error, setError] = useState("");
+  const history = useHistory();
 
-    function handleSubmit(e) {
-        e.preventDefault()
+  function handleSubmit(e) {
+    e.preventDefault()
 
+  }
+
+  async function handleLogin(e) {
+    e.preventDefault();
+
+    try {
+      setError("");
+      setLoading(true);
+      await login(emailRef.current.value, passwordRef.current.value);
+      history.push("/");
+      console.log("logged in")
+    } catch (er) {
+      setError("Error al iniciar sesión: " + er);
     }
 
-    async function handleLogin(e) {
-        e.preventDefault();
-    
-        try {
-          setError("");
-          setLoading(true);
-          await login(emailRef.current.value, passwordRef.current.value);
-          history.push("/");
-          console.log("logged in")
-        } catch(er) {
-          setError("Error al iniciar sesión: " + er);
-        }
-    
-        setLoading(false);
-      }
+    setLoading(false);
+  }
 
-    return (
+  return (
 
-        <div
-            style={{
-                display: "flex",
-                flexWrap: "wrap",
-                alignItems: "center",
-                justifyContent: "center",
-                marginTop: "100px"
-            }}
-        >
+    <FlexWrap>
 
+      <Card>
 
-            <Card>
+        <BlueDiv>
+          <H2>Iniciar sesión</H2>
+        </BlueDiv>
 
-                <BlueDiv>
-                    <H2>Ingrese sus datos para iniciar sesión</H2>
-                </BlueDiv>
+        <FlexContainer>
 
-                <FlexContainer>
+          <H4>Ingrese sus datos para iniciar sesión</H4>
 
-                    <H4>Si deseas crear una cuenta da click aquí!</H4>
+          <LinkReact>Si deseas solicitar una cuenta da click aquí!</LinkReact>
 
-                    {error && <Alert variant="danger">{error}</Alert>}
-                    <Form onSubmit={handleLogin}>
+          {error && <Alert variant="danger">{error}</Alert>}
+          <Form onSubmit={handleLogin}>
 
-                        <Container id="email">
-                            <Label>Dirección de correo electrónico</Label>
-                            <Input
-                                type="email"
-                                ref={emailRef}
-                                placeholder="ejemplo@axios.com"
-                                required
-                            />
-                        </Container>
+            <Container id="email">
+              <Label>Dirección de correo electrónico</Label>
+              <Input
+                type="email"
+                ref={emailRef}
+                placeholder="ejemplo@axios.com"
+                required
+              />
+            </Container>
 
-                        <Container id="password">
-                            <Label>Contraseña</Label>
-                            <Input
-                                minLength="8"
-                                type="password"
-                                ref={passwordRef}
-                                placeholder="Al menos 8 dígitos"
-                            />
-                        </Container>
+            <Container id="password">
+              <Label>Contraseña</Label>
+              <Input
+                minLength="8"
+                type="password"
+                ref={passwordRef}
+                placeholder="Al menos 8 dígitos"
+              />
+            </Container>
 
-                        <ButtonReact style={{ marginBottom: '10px' }}
-                            disabled={loading} type="submit"
-                        >
-                            Iniciar sesión
-                        </ButtonReact>
-                    </Form>
-                </FlexContainer>
+            <ButtonReact style={{ marginBottom: '10px' }}
+              disabled={loading} type="submit"
+            >
+              Iniciar sesión
+            </ButtonReact>
+          </Form>
+        </FlexContainer>
 
-            </Card>
+      </Card>
 
-        </div>
+    </FlexWrap>
 
 
-    )
+  )
 }
 
-
+const FlexWrap = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+`;
 
 const ButtonReact = styled(Button)`
   text-decoration: none;
@@ -108,10 +107,10 @@ const ButtonReact = styled(Button)`
   padding: 14px 28px;
   font-size: 20px;
   cursor: pointer;
-  border-color: #2196F3;
-  color: dodgerblue;
+  border-color: #005092;
+  color: #005092;
   :hover {
-      background: #2196F3;
+      background: #005092;
       color: white;
   }
 `;
@@ -177,9 +176,9 @@ const Form = styled.form`
 `;
 
 const BlueDiv = styled.div`
-  background-color: #2196F3;
-  padding: 10px;
-  height: 100px;
+  background-color: #005092;
+  padding: 5px;
+  height: 80px;
   border-radius: 8px 8px 0px 0px;
 `;
 
@@ -198,4 +197,10 @@ const Input = styled.input`
   margin: 4px 0;
   width: 100%;
   font-size: 20px;
+`;
+
+const LinkReact = styled(Link)`
+  text-decoration: none;
+  font-size: 20px;
+  color: #005092;
 `;

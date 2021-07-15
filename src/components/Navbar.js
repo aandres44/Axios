@@ -47,6 +47,12 @@ const Navbar = () => {
       className: "nav-text",
     },
     {
+      title: "Agregar Institución",
+      path: "/Institucion",
+      icon: <BiUserCircle />,
+      className: "nav-text",
+    },
+    {
       title: "Administrar material",
       path: "/admin",
       icon: <BiUserCircle />,

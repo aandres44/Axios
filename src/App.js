@@ -4,6 +4,7 @@ import Login from './components/Login';
 import Home from './components/Home';
 import Navbar from './components/Navbar'
 import { AuthProvider } from "./contexts/AuthContext";
+import Institucion from "./components/Institucion";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Route exact path='/' component={Home} />
             <Route path='/login' component={Login} />
             <Route path='/dashboard' component={Dashboard} />
+            <Route path='/Institucion' component={Institucion} />
           </Switch>
         </AuthProvider>
       </Router>
