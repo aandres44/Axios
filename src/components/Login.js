@@ -48,7 +48,7 @@ export default function Login() {
 
           <H4>Ingrese sus datos para iniciar sesión</H4>
 
-          <LinkReact>Si deseas solicitar una cuenta da click aquí!</LinkReact>
+          <LinkReact to='/signup'>Si deseas solicitar una cuenta da click aquí!</LinkReact>
 
           {error && <Alert variant="danger">{error}</Alert>}
           <Form onSubmit={handleLogin}>

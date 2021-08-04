@@ -53,7 +53,7 @@ const Navbar = () => {
       className: "nav-text",
     },
     {
-      title: "Administrar material",
+      title: "Administrar institución",
       path: "/admin",
       icon: <BiUserCircle />,
       className: "nav-text",
