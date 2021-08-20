@@ -6,32 +6,55 @@ import styled from "@emotion/styled";
 import firebase, { auth } from "../firebase";
 
 export default function Signup() {
+    const nameRef = useRef()
     const emailRef = useRef()
+    const idRef = useRef()
     const passwordRef = useRef()
+    const passwordConfirmRef = useRef()
     const [loading, setLoading] = useState(false)
-    const { login } = useAuth();
+    const { signup } = useAuth();
     const [error, setError] = useState("");
     const history = useHistory();
 
-    function handleSubmit(e) {
-        e.preventDefault()
-
-    }
-
-    async function handleLogin(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
+
+        if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+            return setError("Las contraseñas no coinciden");
+        }
 
         try {
             setError("");
             setLoading(true);
-            await login(emailRef.current.value, passwordRef.current.value);
+
+            let name = nameRef.current.value;
+            let password = passwordRef.current.value;
+            let email = emailRef.current.value;
+            let id = idRef.current.value;
+
+            await signup(email, password);
+
+            writeUserData(name, email, id);
+
             history.push("/");
-            console.log("logged in")
         } catch (er) {
-            setError("Error al iniciar sesión: " + er);
+            setError("Error al crear la cuenta: " + er);
         }
 
         setLoading(false);
+    }
+
+    function writeUserData(name, email, id) {
+        //Promise
+        firebase
+            .database()
+            .ref("Global/users/" + auth.currentUser.uid)
+            .set({
+                name: name,
+                email: email,
+                id: id,
+            });
+        //updateName(name)
     }
 
     return (
@@ -51,7 +74,18 @@ export default function Signup() {
                     <LinkReact to='/login'>Si deseas iniciar sesión da click aquí!</LinkReact>
 
                     {error && <Alert variant="danger">{error}</Alert>}
-                    <Form onSubmit={handleLogin}>
+                    <Form onSubmit={handleSubmit}>
+
+                        <Container>
+                            <Label>Nombre</Label>
+                            <Input
+                                type="name"
+                                ref={nameRef}
+                                placeholder="Nombre"
+                                required
+                            />
+
+                        </Container>
 
                         <Container id="email">
                             <Label>Dirección de correo electrónico</Label>
@@ -70,15 +104,26 @@ export default function Signup() {
                                 type="password"
                                 ref={passwordRef}
                                 placeholder="Al menos 8 dígitos"
+                                required
+                            />
+                        </Container>
+
+                        <Container id="password">
+                            <Label>Contraseña</Label>
+                            <Input
+                                minLength="8"
+                                type="password"
+                                ref={passwordConfirmRef}
+                                placeholder="Vuelve a escribir la contraseña"
+                                required
                             />
                         </Container>
 
                         <Container>
                             <Label>Id de la institución</Label>
                             <Input
-                                minLength="8"
                                 type="text"
-                                ref={passwordRef}
+                                ref={idRef}
                                 placeholder="Proporcionado por tu empleador"
                             />
                         </Container>

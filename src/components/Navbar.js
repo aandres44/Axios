@@ -5,6 +5,7 @@ import { AiOutlineCloseCircle, AiFillHome } from "react-icons/ai";
 import { BiBuildingHouse, BiUserCircle } from "react-icons/bi";
 import "./navbar.css";
 import { IconContext } from "react-icons";
+import { useAuth } from "../contexts/AuthContext";
 
 //npm install react-router-dom
 
@@ -15,7 +16,7 @@ const Navbar = () => {
     setSidebar(!sidebar);
   };
 
-  const data = [
+  const [data, setData] = useState([
     {
       title: "Inicio",
       path: "/",
@@ -35,8 +36,8 @@ const Navbar = () => {
       className: "nav-text",
     },
     {
-      title: "Login",
-      path: "/login",
+      title: "Perfil",
+      path: "/profile",
       icon: <BiUserCircle />,
       className: "nav-text",
     },
@@ -58,7 +59,14 @@ const Navbar = () => {
       icon: <BiUserCircle />,
       className: "nav-text",
     },
-  ];
+  ]);
+
+  
+
+
+
+  
+
 
   return (
     <IconContext.Provider value={{ color: "#fff" }}>

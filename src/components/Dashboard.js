@@ -6,6 +6,13 @@ import styled from "@emotion/styled";
 import firebase, { auth } from "../firebase";
 
 export default function Dashboard() {
+
+    const globalRef = firebase.database().ref().child("Global");
+    const institucionRef = globalRef.child("institucion");
+    populationRef.on("value", (snapshot) => {
+        const obj = snapshot.val()
+    })
+
     return (
         <FlexWrap>
 
