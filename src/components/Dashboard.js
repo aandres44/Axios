@@ -9,7 +9,7 @@ export default function Dashboard() {
 
     const globalRef = firebase.database().ref().child("Global");
     const institucionRef = globalRef.child("institucion");
-    populationRef.on("value", (snapshot) => {
+    institucionRef.on("value", (snapshot) => {
         const obj = snapshot.val()
     })
 

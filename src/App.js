@@ -8,6 +8,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import Institucion from "./components/Institucion";
 import PrivateRoute from "./PrivateRoute";
 import Profile from "./components/Profile";
+import Videos from "./components/Videos";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <PrivateRoute path='/profile' component={Profile}/>
             <Route path='/admin' component={Dashboard} />
             <Route path='/Institucion' component={Institucion} />
+            <Route path='/Videos' component={Videos} />
           </Switch>
         </AuthProvider>
       </Router>
